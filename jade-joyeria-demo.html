@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jade Joyería — Joyería Fina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8D5A3;
+      --gold-dark: #8B6914;
+      --black: #0A0A0A;
+      --dark: #111111;
+      --dark2: #1A1A1A;
+      --dark3: #222222;
+      --text: #E8E0D0;
+      --text-muted: #9A8F7E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 60px;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.97), transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo span { font-style: italic; }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 10px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      white-space: nowrap;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(10,10,10,0.93) 0%, rgba(10,10,10,0.55) 50%, rgba(10,10,10,0.88) 100%),
+        linear-gradient(to bottom right, #1a0e24, #0d0d14, #0a0606, #111108);
+    }
+
+    /* Shimmer lines decoration */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(45deg, transparent 40%, rgba(201,168,76,0.04) 50%, transparent 60%),
+        linear-gradient(-45deg, transparent 40%, rgba(201,168,76,0.03) 50%, transparent 60%);
+      background-size: 80px 80px;
+    }
+
+    .hero-accent {
+      position: absolute;
+      top: 0; right: 0;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(to left, rgba(201,168,76,0.06), transparent);
+      pointer-events: none;
+    }
+
+    /* Decorative ring */
+    .hero-ring {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(420px, 38vw);
+      height: min(420px, 38vw);
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-ring::before {
+      content: '';
+      width: 85%;
+      height: 85%;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.1);
+      display: block;
+    }
+
+    .hero-ring-inner {
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(201,168,76,0.12), rgba(201,168,76,0.02) 60%, transparent);
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .hero-line {
+      position: absolute;
+      left: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 220px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    }
+
+    .hero-content {
+      position: relative;
+      padding: 0 60px 0 90px;
+      max-width: 640px;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 6vw, 82px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+
+    .hero-desc {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--text-muted);
+      max-width: 400px;
+      margin-bottom: 44px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      padding: 16px 40px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      min-height: 52px;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); }
+
+    .btn-ghost {
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.3s;
+      min-height: 44px;
+    }
+
+    .btn-ghost::after { content: '→'; font-size: 14px; }
+    .btn-ghost:hover { color: var(--gold); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 60px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-bar {
+      background: var(--gold);
+      padding: 13px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 22s linear infinite;
+    }
+
+    .marquee-inner span {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin: 0 40px;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 100px 60px; }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 4vw, 54px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: #fff;
+      max-width: 560px;
+    }
+
+    .section-title em { font-style: italic; color: var(--gold-light); }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+      height: 560px;
+    }
+
+    /* CSS art — elegant jewelry display panel */
+    .about-img-panel {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #1c1008 0%, #0f0d0a 40%, #1a1208 70%, #0a0806 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-img-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 30% 30%, rgba(201,168,76,0.18) 0%, transparent 60%),
+                         radial-gradient(circle at 70% 70%, rgba(201,168,76,0.08) 0%, transparent 50%);
+    }
+
+    .about-img-glyph {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .glyph-ring {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 2px solid rgba(201,168,76,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .glyph-ring::before {
+      content: '';
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.3);
+      position: absolute;
+    }
+
+    .glyph-diamond {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.9), rgba(232,213,163,0.7), rgba(139,105,20,0.8));
+      transform: rotate(45deg);
+      box-shadow: 0 0 30px rgba(201,168,76,0.3), inset 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    .glyph-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      letter-spacing: 0.3em;
+      color: rgba(201,168,76,0.7);
+      text-transform: uppercase;
+    }
+
+    .glyph-line {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,168,76,0.5), transparent);
+    }
+
+    .about-image-frame {
+      position: absolute;
+      top: -16px; left: -16px;
+      right: 16px; bottom: 16px;
+      border: 1px solid rgba(201,168,76,0.25);
+      pointer-events: none;
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      width: 120px;
+      height: 120px;
+      background: var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .about-badge-text {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .about-content { padding: 20px 0; }
+
+    .about-text {
+      font-size: 14px;
+      line-height: 2;
+      color: var(--text-muted);
+      margin: 28px 0 20px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      border-top: 1px solid var(--dark3);
+      padding-top: 40px;
+      margin-top: 20px;
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ── COLLECTIONS ── */
+    .collections { background: var(--black); }
+
+    .collections-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+
+    .collections-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    .collection-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .collection-item:first-child { grid-row: span 2; }
+
+    /* CSS gradient panels for collections */
+    .coll-panel {
+      width: 100%;
+      height: 280px;
+      display: block;
+      transition: all 0.6s ease;
+      position: relative;
+    }
+
+    .collection-item:first-child .coll-panel {
+      height: 100%;
+      min-height: 563px;
+    }
+
+    .coll-panel-1 { background: linear-gradient(145deg, #1a0808 0%, #0d0505 50%, #1f1010 100%); }
+    .coll-panel-2 { background: linear-gradient(145deg, #080d1a 0%, #05080d 50%, #101520 100%); }
+    .coll-panel-3 { background: linear-gradient(145deg, #0a1208 0%, #060d05 50%, #131a10 100%); }
+    .coll-panel-4 { background: linear-gradient(145deg, #12080f 0%, #0d0508 50%, #1a0f14 100%); }
+    .coll-panel-5 { background: linear-gradient(145deg, #100a00 0%, #0d0800 50%, #1a1200 100%); }
+
+    /* Shimmer overlay on each panel */
+    .coll-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 40% 35%, rgba(201,168,76,0.2) 0%, transparent 55%);
+      transition: opacity 0.4s;
+    }
+
+    /* Center icon in each panel */
+    .coll-panel::after {
+      content: attr(data-icon);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      opacity: 0.25;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+
+    .collection-item:hover .coll-panel::before {
+      background: radial-gradient(circle at 40% 35%, rgba(201,168,76,0.08) 0%, transparent 55%);
+    }
+
+    .collection-item:hover .coll-panel { filter: brightness(0.7); }
+    .collection-item:hover .coll-panel::after { opacity: 0.12; transform: translate(-50%, -50%) scale(1.1); }
+
+    .collection-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px;
+      background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.6) 60%, transparent 100%);
+      transform: translateY(8px);
+      opacity: 0;
+      transition: all 0.4s;
+    }
+
+    .collection-item:hover .collection-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Always visible on touch devices */
+    @media (hover: none) {
+      .collection-overlay { opacity: 1; transform: translateY(0); }
+      .coll-panel { filter: brightness(0.75); }
+    }
+
+    .collection-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .collection-desc {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--gold-light);
+    }
+
+    .collection-label {
+      position: absolute;
+      top: 18px; left: 18px;
+      background: rgba(10,10,10,0.8);
+      border: 1px solid rgba(201,168,76,0.5);
+      padding: 5px 12px;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      z-index: 1;
+    }
+
+    /* ── SERVICES ── */
+    .services { background: var(--dark); }
+
+    .services-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 60px;
+      align-items: end;
+    }
+
+    .services-text {
+      font-size: 14px;
+      line-height: 2;
+      color: var(--text-muted);
+      margin-top: 28px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    .service-card {
+      background: var(--dark2);
+      padding: 48px 36px;
+      transition: background 0.3s;
+      border-top: 2px solid transparent;
+    }
+
+    .service-card:hover {
+      background: var(--dark3);
+      border-top-color: var(--gold);
+    }
+
+    .service-icon { font-size: 28px; margin-bottom: 22px; }
+
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .service-desc {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--text-muted);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--black); text-align: center; }
+    .testimonials .section-label { justify-content: center; }
+    .testimonials .section-label::before { display: none; }
+    .testimonials .section-title { margin: 0 auto 60px; text-align: center; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    .testimonial-card {
+      background: var(--dark);
+      padding: 44px 36px;
+      text-align: left;
+    }
+
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      color: var(--gold);
+      line-height: 0.5;
+      margin-bottom: 22px;
+      opacity: 0.35;
+    }
+
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 26px;
+    }
+
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+    }
+
+    .testimonial-author {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── BOOKING ── */
+    .booking {
+      background: var(--dark2);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+    }
+
+    .booking-panel {
+      min-height: 600px;
+      background: linear-gradient(145deg, #0a0610 0%, #060408 40%, #100810 70%, #080410 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .booking-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 40% 40%, rgba(201,168,76,0.15) 0%, transparent 60%);
+    }
+
+    .booking-panel-art {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 40px;
+    }
+
+    .booking-diamond-wrap {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .booking-diamond {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.7), rgba(232,213,163,0.5), rgba(139,105,20,0.6));
+      transform: rotate(45deg);
+      box-shadow: 0 0 40px rgba(201,168,76,0.2);
+    }
+
+    .booking-panel-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: rgba(201,168,76,0.6);
+      text-align: center;
+      max-width: 260px;
+      line-height: 1.6;
+    }
+
+    .booking-panel-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .booking-content {
+      padding: 80px 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .booking-text {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--text-muted);
+      margin: 24px 0 36px;
+    }
+
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* font-size 16px prevents iOS auto-zoom on focus */
+    .form-input {
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--text);
+      padding: 15px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.3s;
+      min-height: 52px;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    .form-input:focus { border-color: var(--gold); }
+    .form-input::placeholder { color: var(--text-muted); font-size: 14px; }
+    select.form-input option { background: var(--dark3); }
+
+    .form-submit {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      padding: 18px 40px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.3s;
+      min-height: 56px;
+      align-self: flex-start;
+    }
+
+    .form-submit:hover { background: var(--gold-light); }
+    .form-submit:active { background: var(--gold-dark); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050505;
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 60px;
+      border-top: 1px solid var(--dark3);
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .footer-logo em { font-style: italic; }
+
+    .footer-tagline {
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 220px;
+    }
+
+    .footer-heading {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 22px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.3s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 18px;
+    }
+
+    .footer-contact-label {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .footer-contact-val {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-bottom {
+      background: #050505;
+      padding: 20px 60px;
+      border-top: 1px solid var(--dark3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-copy span { color: var(--gold); }
+
+    /* ════════════════════════════════
+       MOBILE-FIRST RESPONSIVE
+    ════════════════════════════════ */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      nav { padding: 20px 32px; }
+      section { padding: 80px 40px; }
+      .hero-content { padding: 0 40px 0 60px; }
+      .hero-line { left: 32px; }
+      .hero-scroll { left: 32px; }
+      .collections-grid { grid-template-columns: repeat(2, 1fr); }
+      .collection-item:first-child { grid-row: span 1; }
+      .collection-item:first-child .coll-panel { min-height: 280px; }
+      .about { gap: 48px; }
+      .booking-content { padding: 60px 48px; }
+      footer { grid-template-columns: 1fr 1fr; gap: 48px; }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      /* Nav — logo + book button only */
+      nav {
+        padding: 16px 20px;
+        background: rgba(10,10,10,0.97);
+      }
+
+      .nav-links { display: none; }
+
+      .nav-cta {
+        padding: 10px 20px;
+        font-size: 10px;
+      }
+
+      /* Hero */
+      section { padding: 60px 20px; }
+
+      .hero {
+        min-height: 100svh;
+        align-items: flex-end;
+        padding-bottom: 80px;
+      }
+
+      .hero-ring { display: none; }
+      .hero-line { display: none; }
+      .hero-scroll { display: none; }
+
+      .hero-content {
+        padding: 0 20px;
+        max-width: 100%;
+      }
+
+      .hero-eyebrow { font-size: 9px; letter-spacing: 0.25em; }
+
+      .hero-title { font-size: clamp(42px, 11vw, 60px); }
+
+      .hero-subtitle { font-size: 16px; }
+
+      .hero-desc {
+        font-size: 13px;
+        max-width: 100%;
+        margin-bottom: 36px;
+      }
+
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+      .btn-primary { width: 100%; justify-content: center; font-size: 11px; }
+      .btn-ghost { font-size: 11px; }
+
+      /* Marquee */
+      .marquee-inner span { font-size: 9px; margin: 0 24px; }
+
+      /* About */
+      .about {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0;
+      }
+
+      .about-image {
+        height: 320px;
+        margin-bottom: 0;
+      }
+
+      .about-img-panel { height: 320px; }
+      .about-image-frame { display: none; }
+
+      .about-badge {
+        bottom: 16px;
+        right: 16px;
+        width: 100px;
+        height: 100px;
+      }
+
+      .about-badge-num { font-size: 34px; }
+
+      .about-content {
+        padding: 40px 20px;
+      }
+
+      .about-text { font-size: 14px; margin: 20px 0 16px; }
+
+      .about-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        padding-top: 28px;
+      }
+
+      .stat-num { font-size: 34px; }
+
+      /* Collections */
+      .collections { padding: 60px 20px; }
+
+      .collections-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .collections-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3px;
+      }
+
+      .collection-item:first-child { grid-row: span 1; }
+      .collection-item:first-child .coll-panel { min-height: 200px; }
+      .coll-panel { height: 200px; }
+      .coll-panel::after { font-size: 36px; }
+      .collection-name { font-size: 18px; }
+
+      /* Services */
+      .services-intro {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .services-grid { grid-template-columns: 1fr; gap: 3px; }
+
+      .service-card { padding: 36px 24px; }
+
+      /* Testimonials */
+      .testimonials-grid { grid-template-columns: 1fr; gap: 3px; }
+      .testimonial-card { padding: 36px 24px; }
+      .testimonial-text { font-size: 17px; }
+
+      /* Booking */
+      .booking {
+        grid-template-columns: 1fr;
+        padding: 0;
+      }
+
+      .booking-panel { min-height: 220px; }
+      .booking-panel-art { padding: 24px; gap: 16px; }
+      .booking-diamond-wrap { width: 120px; height: 120px; }
+      .booking-diamond { width: 48px; height: 48px; }
+      .booking-panel-quote { font-size: 17px; }
+
+      .booking-content { padding: 44px 20px; }
+      .booking-text { font-size: 14px; }
+
+      .form-row { grid-template-columns: 1fr; gap: 14px; }
+
+      .form-submit {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        align-self: stretch;
+        padding: 20px;
+        font-size: 12px;
+      }
+
+      /* Footer */
+      footer {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 48px 20px;
+      }
+
+      .footer-bottom {
+        padding: 16px 20px;
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+      }
+
+      .footer-links a { min-height: 36px; font-size: 14px; }
+    }
+
+    /* Small phones */
+    @media (max-width: 390px) {
+      .hero-title { font-size: 38px; }
+      .collections-grid { grid-template-columns: 1fr; }
+      .collection-item:first-child .coll-panel { min-height: 240px; }
+      .coll-panel { height: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo"><span>Jade</span> Joyería</a>
+    <ul class="nav-links">
+      <li><a href="#colecciones">Colecciones</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="#cita" class="nav-cta">Agendar Cita</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-ring"><div class="hero-ring-inner"></div></div>
+    <div class="hero-line"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Joyería Fina · Diseño Personalizado</p>
+      <h1 class="hero-title">Piezas que<br><em>cuentan</em><br>tu historia</h1>
+      <p class="hero-subtitle">Crafted with love. Hecho con pasión.</p>
+      <p class="hero-desc">En Jade Joyería, cada pieza es una obra de arte creada a mano con los más finos materiales. Especializados en joyería personalizada para los momentos más especiales de tu vida.</p>
+      <div class="hero-actions">
+        <a href="#colecciones" class="btn-primary">Ver Colecciones</a>
+        <a href="#cita" class="btn-ghost">Agendar Cita</a>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll para explorar</div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-inner">
+      <span>Oro 18K</span><span>·</span>
+      <span>Diamantes Naturales</span><span>·</span>
+      <span>Diseño Personalizado</span><span>·</span>
+      <span>Envío Asegurado</span><span>·</span>
+      <span>Garantía de Por Vida</span><span>·</span>
+      <span>Plata .925</span><span>·</span>
+      <span>Grabado Gratis</span><span>·</span>
+      <span>Oro 18K</span><span>·</span>
+      <span>Diamantes Naturales</span><span>·</span>
+      <span>Diseño Personalizado</span><span>·</span>
+      <span>Envío Asegurado</span><span>·</span>
+      <span>Garantía de Por Vida</span><span>·</span>
+      <span>Plata .925</span><span>·</span>
+      <span>Grabado Gratis</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="nosotros">
+    <div class="about-image">
+      <div class="about-img-panel">
+        <div class="about-img-glyph">
+          <div class="glyph-ring">
+            <div class="glyph-diamond"></div>
+          </div>
+          <div class="glyph-line"></div>
+          <span class="glyph-text">Artesanía fina</span>
+        </div>
+      </div>
+      <div class="about-image-frame"></div>
+      <div class="about-badge">
+        <span class="about-badge-num">15</span>
+        <span class="about-badge-text">Años de<br>experiencia</span>
+      </div>
+    </div>
+    <div class="about-content">
+      <p class="section-label">Nuestra Historia</p>
+      <h2 class="section-title">Tradición, <em>arte</em> y pasión familiar</h2>
+      <p class="about-text">Jade Joyería nació del amor de una familia por el arte de la joyería. Desde nuestra fundación, hemos dedicado cada pieza a capturar los momentos más importantes de nuestros clientes — compromisos, quinceañeras, aniversarios y celebraciones que merecen ser recordadas para siempre.</p>
+      <p class="about-text">Cada joya es trabajada a mano por nuestros artesanos certificados, usando únicamente materiales de la más alta calidad. No somos una tienda más — somos tus compañeros en los momentos que más importan.</p>
+      <div class="about-stats">
+        <div><div class="stat-num">2,400+</div><div class="stat-label">Clientes satisfechos</div></div>
+        <div><div class="stat-num">150+</div><div class="stat-label">Reseñas de 5 estrellas</div></div>
+        <div><div class="stat-num">100%</div><div class="stat-label">Materiales certificados</div></div>
+        <div><div class="stat-num">48hr</div><div class="stat-label">Tiempo de consulta</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTIONS -->
+  <section class="collections" id="colecciones">
+    <div class="collections-header">
+      <div>
+        <p class="section-label">Nuestras Piezas</p>
+        <h2 class="section-title">Colecciones <em>exclusivas</em></h2>
+      </div>
+      <a href="#cita" class="btn-ghost">Ver todo el catálogo</a>
+    </div>
+    <div class="collections-grid">
+      <div class="collection-item">
+        <div class="collection-label">Más Popular</div>
+        <div class="coll-panel coll-panel-1" data-icon="💍"></div>
+        <div class="collection-overlay">
+          <div class="collection-name">Anillos de Compromiso</div>
+          <div class="collection-desc">Diseños únicos · Desde $450</div>
+        </div>
+      </div>
+      <div class="collection-item">
+        <div class="coll-panel coll-panel-2" data-icon="✨"></div>
+        <div class="collection-overlay">
+          <div class="collection-name">Pulseras & Brazaletes</div>
+          <div class="collection-desc">Oro 18K · Plata .925</div>
+        </div>
+      </div>
+      <div class="collection-item">
+        <div class="coll-panel coll-panel-3" data-icon="📿"></div>
+        <div class="collection-overlay">
+          <div class="collection-name">Collares & Cadenas</div>
+          <div class="collection-desc">Personalización disponible</div>
+        </div>
+      </div>
+      <div class="collection-item">
+        <div class="coll-panel coll-panel-4" data-icon="🌟"></div>
+        <div class="collection-overlay">
+          <div class="collection-name">Aretes & Pendientes</div>
+          <div class="collection-desc">Para cada ocasión</div>
+        </div>
+      </div>
+      <div class="collection-item">
+        <div class="coll-panel coll-panel-5" data-icon="🎁"></div>
+        <div class="collection-overlay">
+          <div class="collection-name">Piezas Personalizadas</div>
+          <div class="collection-desc">Tu diseño, nuestra artesanía</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="servicios">
+    <div class="services-intro">
+      <div>
+        <p class="section-label">Lo que ofrecemos</p>
+        <h2 class="section-title">Servicios <em>especializados</em></h2>
+      </div>
+      <p class="services-text">Más allá de vender joyería, ofrecemos una experiencia completa — desde el diseño hasta la entrega. Nuestro equipo está aquí para guiarte en cada paso del camino.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">💍</div>
+        <div class="service-name">Diseño Personalizado</div>
+        <p class="service-desc">Trabajamos contigo para crear la pieza de tus sueños desde cero. Consulta inicial gratuita para entender tu visión y presupuesto.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✨</div>
+        <div class="service-name">Restauración & Reparación</div>
+        <p class="service-desc">Devolvemos vida a tus joyas más preciadas. Desde ajuste de tallas hasta restauración completa de piezas heredadas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎁</div>
+        <div class="service-name">Grabado & Personalización</div>
+        <p class="service-desc">Añade un mensaje especial a tu pieza. Grabado incluido sin costo adicional en todas nuestras joyas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <p class="section-label">Lo que dicen</p>
+    <h2 class="section-title">Nuestros <em>clientes</em> hablan</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">El anillo de compromiso que crearon para mí fue absolutamente perfecto. Mi prometida lloró de la emoción. No puedo recomendar Jade Joyería lo suficiente.</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-author">Miguel R. — Houston, TX</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Llevé el collar de mi abuela para restauración y lo regresaron como nuevo. El cuidado y detalle que pusieron fue increíble. Soy cliente de por vida.</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-author">Ana L. — San Antonio, TX</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Buscaba algo único para la quinceañera de mi hija y me ayudaron a diseñar una tiara y aretes a juego. El resultado superó todas mis expectativas.</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-author">Carmen V. — Dallas, TX</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="cita">
+    <div class="booking-panel">
+      <div class="booking-panel-art">
+        <div class="booking-diamond-wrap">
+          <div class="booking-diamond"></div>
+        </div>
+        <div class="booking-panel-line"></div>
+        <p class="booking-panel-quote">"Cada pieza cuenta una historia única — la tuya."</p>
+      </div>
+    </div>
+    <div class="booking-content">
+      <p class="section-label">Empieza aquí</p>
+      <h2 class="section-title">Agenda tu <em>consulta</em> gratuita</h2>
+      <p class="booking-text">Cuéntanos sobre la pieza que sueñas. Nuestros especialistas te contactarán para agendar una cita personalizada — sin compromiso, sin costo.</p>
+      <form class="booking-form" onsubmit="return false;">
+        <div class="form-row">
+          <input type="text" class="form-input" placeholder="Tu nombre" autocomplete="name" />
+          <input type="tel" class="form-input" placeholder="Teléfono" autocomplete="tel" />
+        </div>
+        <input type="email" class="form-input" placeholder="Correo electrónico" autocomplete="email" />
+        <select class="form-input">
+          <option value="" disabled selected>¿Qué te interesa?</option>
+          <option>Anillo de compromiso</option>
+          <option>Joyería personalizada</option>
+          <option>Restauración de pieza</option>
+          <option>Regalo especial</option>
+          <option>Quinceañera / Evento</option>
+          <option>Otro</option>
+        </select>
+        <input type="text" class="form-input" placeholder="Cuéntanos brevemente tu idea..." />
+        <button type="submit" class="form-submit">Solicitar Consulta Gratuita →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div>
+      <span class="footer-logo"><em>Jade</em> Joyería</span>
+      <p class="footer-tagline">Joyería fina artesanal para los momentos que definen tu historia.</p>
+    </div>
+    <div>
+      <p class="footer-heading">Navegación</p>
+      <ul class="footer-links">
+        <li><a href="#colecciones">Colecciones</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#cita">Agendar Cita</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-heading">Servicios</p>
+      <ul class="footer-links">
+        <li><a href="#">Diseño Personalizado</a></li>
+        <li><a href="#">Anillos de Compromiso</a></li>
+        <li><a href="#">Restauración</a></li>
+        <li><a href="#">Grabado Gratis</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-heading">Contacto</p>
+      <div class="footer-contact-item">
+        <span class="footer-contact-label">Teléfono</span>
+        <span class="footer-contact-val">(555) 000-0000</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="footer-contact-label">Correo</span>
+        <span class="footer-contact-val">hola@jadejoyeria.com</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="footer-contact-label">Horario</span>
+        <span class="footer-contact-val">Lun–Sáb · 10am–7pm</span>
+      </div>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jade Joyería. Todos los derechos reservados. Sitio web por <span>Insyte Solutions</span>.</p>
+    <p class="footer-copy">Diseñado con ♥ para la comunidad hispana</p>
+  </div>
+
+</body>
+</html>
